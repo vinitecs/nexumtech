@@ -1,4 +1,4 @@
-package com.nexum;
+package br.com.nexum;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
