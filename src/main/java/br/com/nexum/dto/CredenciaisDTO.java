@@ -2,13 +2,15 @@ package br.com.nexum.dto;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import br.com.nexum.Enum.Perfil;
 
 public class CredenciaisDTO {
 	
 	private Integer id;
-	private String user;
-	private String password;
-	private String email;
+	private String usuario;
+	private String senha;
 	private Set<Integer> perfis = new HashSet<>();
 	
 	
@@ -20,29 +22,26 @@ public class CredenciaisDTO {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUser() {
-		return user;
+	public String getUsuario() {
+		return usuario;
 	}
-	public void setUser(String user) {
-		this.user = user;
+	public void setUsuario(String user) {
+		this.usuario = user;
 	}
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String password) {
+		this.senha = password;
 	}
-	public String getEmail() {
-		return email;
+	
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public Set<Integer> getPerfis() {
-		return perfis;
-	}
-	public void setPerfis(Set<Integer> perfis) {
-		perfis.add(perfis.getCod());
+	
+	public void addPerfil(Perfil perfil) {
+		
+		perfis.add(perfil.getCod());
 	}
 	
 	

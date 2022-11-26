@@ -22,10 +22,9 @@ public class UsuarioDAO extends DAO {
 			CredenciaisDTO usr = new CredenciaisDTO();
         	
         	usr.setId(rs.getInt("usuario_id"));
-        	usr.setUser(rs.getString("usuario"));
-        	usr.setPassword(rs.getString("senha"));        	
-        	usr.setEmail(rs.getString("email"));        
-        	usr.setPerfis(Perfil.getCod(rs.getInt("perfil")));    
+        	usr.setUsuario(rs.getString("usuario"));
+        	usr.setSenha(rs.getString("senha"));
+        	usr.addPerfil(Perfil.toEnum(rs.getInt("perfil")));    
   
       	
         	return usr;
@@ -81,9 +80,14 @@ public class UsuarioDAO extends DAO {
 		
 	}
 	public CredenciaisDTO Auth(String user) {
-		String sql= "";
+		String sql = " select usuario_id, "
+				+ "      usuario, "
+				+ "        senha, "
+				+ "       perfil  "
+			    + " from usuario    "
+		      	+ "where usuario = ?" ;
 		
-		return jdbcTemplate.query(sql , RowMapper);
+		return (CredenciaisDTO) jdbcTemplate.queryForObject(sql , rowMapper,user);
 	}
 
 }
